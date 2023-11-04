@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  wp-php-apache-environment:
+    build: .
+    image: custom-wp-php
+    volumes:
+      - ./doc-root:/var/www/html/
+    ports:
+      - 8090:80
+  
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    volumes:
+      - ./mysql_data:/var/lib/mysql
